@@ -7,21 +7,21 @@ interface TaroFetchOptions {
   headers: any
 }
 
-function taroFetch(uri: string, options: TaroFetchOptions): Promise<Response> {
-  return new Promise((resolve) => {
-    const { body: data, headers: header } = options
-    Taro.request({
-      url: uri,
-      data,
-      header,
-      dataType: 'other',
-      method: 'POST',
-      success(res) {
-        const response = new Response(res.data)
-        resolve(response)
-      },
-    })
+async function taroFetch(uri: string, options: TaroFetchOptions): Promise<Response> {
+  const { data, statusCode, errMsg, header } = await Taro.request({
+    url: uri,
+    data: options.body,
+    header: options.headers,
+    dataType: 'other',
+    method: 'POST',
   })
+
+  const response = new Response(data, {
+    headers: header,
+    status: statusCode,
+    statusText: errMsg || '',
+  })
+  return response
 }
 
 export function createFetch() {

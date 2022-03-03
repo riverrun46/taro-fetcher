@@ -1,5 +1,9 @@
 {
   "name": "taro-fetcher",
   "version": "0.1.2",
-  "description": "将微信小程序环境封装成自定义fetch API，主要在Taro项目中与各种GraphQL Client搭配使用"
+  "description": "将微信小程序环境封装成自定义fetch API，主要在Taro项目中与各种GraphQL Client搭配使用",
+  "dependencies": {
+    "cross-fetch": "^3",
+    "@tarojs/taro": "^3"
+  }
 }
